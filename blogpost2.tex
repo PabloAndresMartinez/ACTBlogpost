@@ -7,6 +7,8 @@
 								% TeX will automatically convert eps --> pdf in pdflatex		
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
 %SetFonts
 
 \usepackage{hyperref} % Required for adding links	and customizing them
@@ -20,6 +22,8 @@
 
    \def\ci{\perp\!\!\!\perp}
 
+\newcommand{\sophie}[1]{{\color{cyan}#1}}
+\newcommand{\pablo}[1]{{\color{red}#1}}
 
 \title{HLP Blog post}
 \author{The Author}
@@ -57,21 +61,35 @@ Crudely put, the paper aims to generalise a method that assumes \emph{classical 
 
 Classical mechanics rests on two intuitively reasonable and desirable assumptions.
 \begin{itemize}
-\item \textbf{Causality:} Causality is usually treated as a physical primitive. Simply put it is the principle that there is a [partial] ordering of events in space time. 
+\item \textbf{Causality:} Causality is usually treated as a physical primitive. Simply put it is the principle that there is a [partial] ordering of events in space time. \pablo{In order to have information flow from event \(A\) to event \(B\), \(A\) \textit{must} be in the past of \(B\).}
 
 Physicists often define causality in terms of a \emph{discarding} principle: If we ignore the outcome of a physical process, it doesn't matter what process has occurred. Or, put another way, the outcome of a physical process doesn't change the initial conditions. 
-\item \textbf{locality:} an event \emph{contains/holds/owns} all its information and events separated by space cannot communicate instantaneously.\end{itemize}
 
-Indeed, these principles are so sensible that Einstein himself proposed a thought experiment in 1935 that showed the incompleteness of the current quantum theory, and from which he concluded that local causality must be true. 
+\item \textbf{Locality:} \pablo{Locality is the assumption that, at any given instant, each and every property of any particle has a numeric value assigned to it. In some loose sense, particles have a private list of values for their properties, and they keep updating it as they interact with other particles.} \sout{an event \emph{contains/holds/owns} all its information and events separated by space cannot communicate instantaneously.}
 
-However, Bell's experiment demonstrated empirically that this interpretation is wrong and locality and causality cannot both hold. So, since causality is integral to our understanding of the world and forms the basis of scientific reasoning, the standard interpretation of the Bell experiment is that we are forced to let go of the principle of locality, and accept that spatially separated particles can \emph{share information/be entangled} [LINKS -ask Pablo].
+\pablo{Put in another way, locality is the assumption that particles are individual entities.}
+\end{itemize}
+
+\pablo{However, back in 1935, a paper by Einstein, Podolski and Rosen showed that quantum mechanics (which was a recently born theory) predicted something that contradicted these principles. It predicted that a pair of particles could be prepared so that applying an action on one of them would instantaneously affect the other, no matter how distant in space they were. This ``spooky interaction as a distance'' (which is how Einstein himself referred to it) seemed so unreasonable that the authors presented it as evidence that quantum mechanics was wrong.
+
+However, Einstein was wrong. In 1964, John S. Bell set the bases for an experimental test that would demonstrate that Einstein's ``spooky interaction at a distance'', now known as \textit{entanglement}, was indeed real. Bell's experiment has been replicated countless of times and has plenty of variations. Among them, the violation of the CHSH inequalities is the most approachable: [LINK - Pablo].  
+
+But then, if acting on a particle has an instantaneous effect on a distant point in space, one of the two principle above is violated: On one hand, if we acted on both particles at the same time, each action being a distinct event, both would be affecting each other's result, so it would not be possible to decide on an ordering; causality would be broken. The other option would be to reject locality: the property's values are not intrinsic to each particle, but a global characteristic of the pair. Then, no instantaneous transfer of information is needed, because information was never separated in space.
+
+Since causality is integral to our understanding of the world and forms the basis of scientific reasoning, the standard interpretation of quantum mechanics is to accept non-locality.}
+
+\marginpar{\pablo{This is the best I can do to explain non-locality. If you think it's too much text, we may be able to summarise it a bit, know that we have it written down.}}
+
+\sout{Indeed, these principles are so sensible that Einstein himself proposed a thought experiment in 1935 that showed the incompleteness of the current quantum theory, and from which he concluded that local causality must be true.} 
+
+\sout{However, Bell's experiment demonstrated empirically that this interpretation is wrong and locality and causality cannot both hold. So, since causality is integral to our understanding of the world and forms the basis of scientific reasoning, the standard interpretation of the Bell experiment is that we are forced to let go of the principle of locality, and accept that spatially separated particles can \emph{share information/be entangled} [LINKS -ask Pablo].}
 
 
 
 \vskip 2ex
 
 
-The definition of Bayesian networks implies a discarding principle and hence there is a formal sense in which they are causal (even if, as we shall see, the correlations they model do not always reflect the temporal order). Under this interpretation, the causal theory Bayesian networks describe is classical. Precisely, they can only model probability distributions that satisfy local causality. Hence, in particular, they are not sufficient to model all physical correlations.
+The definition of Bayesian networks implies a discarding principle \pablo{[LINK to discussion below]} and hence there is a formal sense in which they are causal (even if, as we shall see, the correlations they model do not always reflect the temporal order). Under this interpretation, the causal theory Bayesian networks describe is classical. Precisely, they can only model probability distributions that satisfy local causality. Hence, in particular, they are not sufficient to model all physical correlations.
 
 
 
@@ -134,6 +152,8 @@ A joint probability distribution $P$ on the nodes of a DAG $ G$ is said to satis
 
 \[P(x_i, \dots, x_n) = \prod_{i = 1}^n P(x_i|x_{pa(X_i)}).\]
 
+\marginpar{\pablo{Should this be \(P(x_i|pa(X_i))\)?}}
+
 So, for the flu, fever and sneezing example above, a distribution $P$ satisfies the Markov condition if
 \[ P(flu, \ fever, \ sneezing)  = P(fever \ | \ flu) P(sneezing \ | \ flu) P(flu).\]
 
@@ -142,7 +162,8 @@ A Bayesian network is defined as a pair $(G,P)$ of a DAG $G$ and a joint probabi
 In particular, given a Bayesian network $(G,P)$ such that there is a directed edge $X \to Y$, the Markov condition implies that 
 \[ \sum_{y} P(x,y) = \sum_y P(x) P(y \ | \ x) = P(x) \sum_y P(y \ | \ x)  = P(x)\] which may be interpreted as a discard condition [LINK BACK UP TO INTRO]. (The ordering is reflected by the fact that we can't derive $P(y)$ from $ \sum_{x} P(x,y) = \sum_x P(x) P(y \ | \ x) $.)
 
- Crucially, the correlations described by Bayesian networks are classical - they satisfy local causality.
+\sout{Crucially, the correlations described by Bayesian networks are classical - they satisfy local causality.} [\pablo{This isn't correct. If you have \(A \to B\) you may have \textit{any} correlation. The whole point is that if you don't want an edge \(A \to B\), because \(A\) and \(B\) may be events that can't possibly signal each other, then you'd like to add a hidden variable \(\Lambda\) forming a fork. The correct claim is that adding a \textit{standard BN node \(\Lambda\) can't explain every possible correlation between A and B.} And that is the reason why we have unobserved nodes. I think this discussion should not be here, but rather in the section about latent/hidden/unobservable variables.]}
+
  \vskip 2ex
  
 
@@ -260,18 +281,18 @@ PICTURE SLIDE 18 p 52
  
  
 
-So, latent variables are a statistical tool that ensure the Markov condition holds. Hence they are inherently classical, and can, in theory, be known.  But the universe is not classical, so, even if we lump whatever we want into as many hidden variables as we want and put them wherever we need, in some cases, there will still be observed correlations that do not satisfy the Markov condition.
+So, latent variables are a statistical tool that ensure the Markov condition holds. Hence they are inherently classical, and can, in theory, be known.  But the universe is not classical, so, even if we lump whatever we want into as many classical hidden variables as we want and put them wherever we need, in some cases, there will still be empirically observed correlations that do not satisfy the Markov condition.
 
 
 
-Most famously, Bell's experiment [LINK] shows that it is possible to have distinct variables $A$ and $B$ that exhibit correlations that cannot be explained by any hidden variable. In fact, if we define a variable $\Lambda$ as the entire past of $A$ and $B$, so that if we create $A$ and $B$ and make sure nothing else can interact with them, then we know everything about $\Lambda$. Still, we may observe correlations that do not satisfy the Markov condition and are therefore not classically causal.
+Most famously, Bell's experiment shows that it is possible to have distinct variables $A$ and $B$ that exhibit correlations that cannot be explained by any classical hidden variable, \pablo{due to classical variables being restricted by the principle of locality} [LINK to introduction]. \sout{In fact, if we define a variable $\Lambda$ as the entire past of $A$ and $B$, so that if we create $A$ and $B$ and make sure nothing else can interact with them, then we know everything about $\Lambda$. Still, we may observe correlations that do not satisfy the Markov condition and are therefore not classically causal.}
 
 
 PICTURE
 
 In other words, though $A \perp B \ | \ \Lambda$, \[ P(a \ | b,\ \lambda) \neq P(a \ | \ \lambda).\]
 
-Implicitly, this means that $\Lambda$ is \emph{unobservable}. \emph{We can't know it.} In particular, it is irrelevant to question whether $A \ci B \ | \ \Lambda$.
+Implicitly, this means that a \textit{classical} $\Lambda$ is not enough. \pablo{If we want \(P(a \ | b,\ \lambda) \neq P(a \ | \ \lambda)\) to hold, \(\Lambda\) must be a non-local (non-classical) variable}. \pablo{Due to how quantum mechanics works, we can't possibly empirically find the value of a non-local variable (for similar reasons to the Heisenberg's uncertainty principle), so non-classical variables are often called \textit{unobservables}}. In particular, it is irrelevant to question whether $A \ci B \ | \ \Lambda$, \pablo{as we would need to know the value of \(\Lambda\) in order to condition over it}.
 
 Indeed, this is the key idea behind what follows. We declare certain variables to be unobserved and then insist that conditional (in)
 dependence only makes sense between \emph{observable variables conditioned over observable variables}.
