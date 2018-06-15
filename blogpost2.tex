@@ -59,26 +59,35 @@ Before getting into the details of the paper, let's try to motivate this discuss
 
 Crudely put, the paper aims to generalise a method that assumes \emph{classical mechanics} to one that holds in \emph{quantum} and more general theories. 
 
-Classical mechanics rests on two intuitively reasonable and desirable assumptions.
+Classical mechanics rests on two intuitively reasonable and desirable assumptions, \sophie{together called \emph{local causality},}
 \begin{itemize}
 \item \textbf{Causality:} Causality is usually treated as a physical primitive. Simply put it is the principle that there is a [partial] ordering of events in space time. \pablo{In order to have information flow from event \(A\) to event \(B\), \(A\) \textit{must} be in the past of \(B\).}
 
 Physicists often define causality in terms of a \emph{discarding} principle: If we ignore the outcome of a physical process, it doesn't matter what process has occurred. Or, put another way, the outcome of a physical process doesn't change the initial conditions. 
 
+\marginpar{\sophie{Of course this is a more correct description of locality. However, I lose the sense of how it is part of our intuitve understanding of the universe...that is, it's not so clear what this has to do with action at a distance.}}
 \item \textbf{Locality:} \pablo{Locality is the assumption that, at any given instant, each and every property of any particle has a numeric value assigned to it. In some loose sense, particles have a private list of values for their properties, and they keep updating it as they interact with other particles.} \sout{an event \emph{contains/holds/owns} all its information and events separated by space cannot communicate instantaneously.}
 
 \pablo{Put in another way, locality is the assumption that particles are individual entities.}
 \end{itemize}
 
-\pablo{However, back in 1935, a paper by Einstein, Podolski and Rosen showed that quantum mechanics (which was a recently born theory) predicted something that contradicted these principles. It predicted that a pair of particles could be prepared so that applying an action on one of them would instantaneously affect the other, no matter how distant in space they were. This ``spooky interaction as a distance'' (which is how Einstein himself referred to it) seemed so unreasonable that the authors presented it as evidence that quantum mechanics was wrong.
+\pablo{However, back in 1935, a paper by Einstein, Podolski and Rosen showed that quantum mechanics (which was a recently born theory) predicted something that contradicted these principles. It predicted that a pair of particles could be prepared so that applying an action on one of them would instantaneously affect the other, no matter how distant in space they were. This ``spooky interaction as a distance'' (which is how Einstein himself referred to it) seemed so unreasonable that the authors presented it as evidence that quantum mechanics was wrong.}
 
-However, Einstein was wrong. In 1964, John S. Bell set the bases for an experimental test that would demonstrate that Einstein's ``spooky interaction at a distance'', now known as \textit{entanglement}, was indeed real. Bell's experiment has been replicated countless of times and has plenty of variations. Among them, the violation of the CHSH inequalities is the most approachable: [LINK - Pablo].  
+\sophie{However, in 1935 \sout{ a paper by }Einstein, Podolski and Rosen showed that quantum mechanics (which was a recently born theory) \sout{predicted something that  contradicted these principles. It } predicted that a pair of particles could be prepared so that applying an action on one of them would instantaneously affect the other, no matter how distant in space they were, thus contradicting local causality. This \sout{``spooky interaction as a distance'' (which is how Einstein himself referred to it)} seemed so unreasonable that the authors presented it as evidence that quantum mechanics was wrong.}
 
+
+\pablo{However, Einstein was wrong. In 1964, John S. Bell set the bases for an experimental test that would demonstrate that Einstein's ``spooky interaction at a distance'', now known as \textit{entanglement}, was indeed real. Bell's experiment has been replicated countless of times and has plenty of variations. Among them, the violation of the CHSH inequalities is the most approachable: [LINK - Pablo].  }
+
+\sophie{But Einstein was wrong. In 1964, John S. Bell set the bases for an experimental test that would demonstrate that Einstein's ``spooky interaction at a distance'' (Einstein's own words), now known as \textit{entanglement}, was indeed real. Bell's experiment has been replicated countless of times and has plenty of variations. \sout{Among them, the violation of the CHSH inequalities is the most approachable: }[LINK - Pablo]. }
+
+\marginpar{\sophie{We could reduce this to the first sentence if necessary, but I like it now.}}
+\pablo{
 But then, if acting on a particle has an instantaneous effect on a distant point in space, one of the two principle above is violated: On one hand, if we acted on both particles at the same time, each action being a distinct event, both would be affecting each other's result, so it would not be possible to decide on an ordering; causality would be broken. The other option would be to reject locality: the property's values are not intrinsic to each particle, but a global characteristic of the pair. Then, no instantaneous transfer of information is needed, because information was never separated in space.
 
 Since causality is integral to our understanding of the world and forms the basis of scientific reasoning, the standard interpretation of quantum mechanics is to accept non-locality.}
 
-\marginpar{\pablo{This is the best I can do to explain non-locality. If you think it's too much text, we may be able to summarise it a bit, know that we have it written down.}}
+
+%\marginpar{\pablo{This is the best I can do to explain non-locality. If you think it's too much text, we may be able to summarise it a bit, know that we have it written down.}}
 
 \sout{Indeed, these principles are so sensible that Einstein himself proposed a thought experiment in 1935 that showed the incompleteness of the current quantum theory, and from which he concluded that local causality must be true.} 
 
@@ -150,9 +159,9 @@ More generally, we may replace $X,Y$ and $Z$ with sets of random variables. So, 
 
 A joint probability distribution $P$ on the nodes of a DAG $ G$ is said to satisfy the Markov condition if for any set of random variable $\{X_i\}_{i = 1}^n$ on the nodes of $G$, with choice of values $\{x_i\}_{i = 1}^n$
 
-\[P(x_i, \dots, x_n) = \prod_{i = 1}^n P(x_i|x_{pa(X_i)}).\]
+\[P(x_i, \dots, x_n) = \prod_{i = 1}^n \sophie{P(x_i|{pa(x_i)})}.\]
 
-\marginpar{\pablo{Should this be \(P(x_i|pa(X_i))\)?}}
+\marginpar{\pablo{Should this be \(P(x_i|pa(X_i))\)?}\sophie{\(P(x_i|pa(x_i))\)}!}
 
 So, for the flu, fever and sneezing example above, a distribution $P$ satisfies the Markov condition if
 \[ P(flu, \ fever, \ sneezing)  = P(fever \ | \ flu) P(sneezing \ | \ flu) P(flu).\]
@@ -285,14 +294,14 @@ So, latent variables are a statistical tool that ensure the Markov condition hol
 
 
 
-Most famously, Bell's experiment shows that it is possible to have distinct variables $A$ and $B$ that exhibit correlations that cannot be explained by any classical hidden variable, \pablo{due to classical variables being restricted by the principle of locality} [LINK to introduction]. \sout{In fact, if we define a variable $\Lambda$ as the entire past of $A$ and $B$, so that if we create $A$ and $B$ and make sure nothing else can interact with them, then we know everything about $\Lambda$. Still, we may observe correlations that do not satisfy the Markov condition and are therefore not classically causal.}
+Most famously, Bell's experiment shows that it is possible to have distinct variables $A$ and $B$ that exhibit correlations that cannot be explained by any classical hidden variable, \pablo{\sout{due to } \sophie{since }classical variables \sout{being } \sophie{are }restricted by the principle of locality} [LINK to introduction]. \sout{In fact, if we define a variable $\Lambda$ as the entire past of $A$ and $B$, so that if we create $A$ and $B$ and make sure nothing else can interact with them, then we know everything about $\Lambda$. Still, we may observe correlations that do not satisfy the Markov condition and are therefore not classically causal.}
 
 
 PICTURE
 
 In other words, though $A \perp B \ | \ \Lambda$, \[ P(a \ | b,\ \lambda) \neq P(a \ | \ \lambda).\]
 
-Implicitly, this means that a \textit{classical} $\Lambda$ is not enough. \pablo{If we want \(P(a \ | b,\ \lambda) \neq P(a \ | \ \lambda)\) to hold, \(\Lambda\) must be a non-local (non-classical) variable}. \pablo{Due to how quantum mechanics works, we can't possibly empirically find the value of a non-local variable (for similar reasons to the Heisenberg's uncertainty principle), so non-classical variables are often called \textit{unobservables}}. In particular, it is irrelevant to question whether $A \ci B \ | \ \Lambda$, \pablo{as we would need to know the value of \(\Lambda\) in order to condition over it}.
+Implicitly, this means that a \textit{classical} $\Lambda$ is not enough. \pablo{If we want \(P(a \ | b,\ \lambda) \neq P(a \ | \ \lambda)\) to hold, \(\Lambda\) must be a non-local (non-classical) variable}. \sout{\pablo{Due to how quantum mechanics works,}} \sophie{Quantum mechanics implies that}\pablo{ we can't possibly empirically find the value of a non-local variable (for similar reasons to the Heisenberg's uncertainty principle), so non-classical variables are often called \textit{unobservables}}. In particular, it is irrelevant to question whether $A \ci B \ | \ \Lambda$, \pablo{as we would need to know the value of \(\Lambda\) in order to condition over it}.
 
 Indeed, this is the key idea behind what follows. We declare certain variables to be unobserved and then insist that conditional (in)
 dependence only makes sense between \emph{observable variables conditioned over observable variables}.
@@ -450,7 +459,7 @@ Moreover, it is easily checked that, given a classical Bayesian network, even if
 In fact, Theorem 22 generalises Theorem 5 in a stricter sense. That is, the generalised Bayesian network setup together with classical causality adds nothing extra to the theory of classical Bayesian networks. If a generalised Markov distribution is classical (then hidden and latent variables may be represented by unobserved nodes), it can be viewed as a classical Bayesian network. More precisely, Lemma 18 says that, given any generalised Bayesian network $(G,P)$ with underlying DAG $G'$ and distribution $P \in \mathcal C$, we can construct a classical Bayesian network $(G', P')$ such that $P'$ agrees with $P$ on the observed nodes. 
 
 \vskip 2ex
-It is worth voicing a note of caution. The authors themselves mention in the conclusion that the construction based on GDAGs with two types of nodes is not entirely satisfactory. The problem is that, although the setups and results presented here do give a generalisation of Theorem 5, they do not, as such, provide a way of generalising Bayesian networks as they are used for probabalistic inference. For example, belief propagation works through observed nodes, but there is no apparent way of generalising it for unobserved nodes.
+It is worth voicing a note of caution. The authors themselves mention in the conclusion that the construction based on GDAGs with two types of nodes is not entirely satisfactory. The problem is that, although the setups and results presented here do give a generalisation of Theorem 5, they do not, as such, provide a way of generalising Bayesian networks as they are used for probabalistic inference \sophie{to non-classical settings}. For example, belief propagation works through observed nodes, but there is no apparent way of generalising it for unobserved nodes.
 
 
 \subsection{Theory independence}
