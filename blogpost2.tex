@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{xcolor}
 \usepackage[normalem]{ulem}
+\usepackage{float}
 %SetFonts
 
 \usepackage{hyperref} % Required for adding links	and customizing them
@@ -22,7 +23,7 @@
 
    \def\ci{\perp\!\!\!\perp}
 
-\newcommand{\sophie}[1]{{\color{cyan}#1}}
+\newcommand{\sophie}[1]{{\color{blue}#1}}
 \newcommand{\pablo}[1]{{\color{red}#1}}
 
 \title{HLP Blog post}
@@ -32,21 +33,26 @@
 \begin{document}
 \maketitle
 
+\sophie{In the final instalment of the \href{http://www.appliedcategorytheory.org/school/}{Applied Category Theory seminar}, we discussed the 2014 paper  \href{http://iopscience.iop.org/article/10.1088/1367-2630/16/11/113043/meta}{\emph{``Theory-independent limits on correlations from generalized Bayesian networks''}} by Henson, Lal and Pusey. 
+
+In this post, we'll give a short introduction to Bayesian networks, explain why quantum mechanics means that one may want to generalise them, and present the main results of the paper. That's a lot to cover, so there won't be a huge amount of category theory, but we hope to give the reader some intuition about the issues involved and how monoidal categories have a role to play in causal theory.}
+
 \section{Introduction}
 
 
-Bayesian networks are a graphical modelling tool used to show how random variables interact. A Bayesian network consists of a pair $(G,P)$ of directed acyclic graph (DAG) $G$ together with a joint probability distribution $P$ on its nodes, satisfying the \emph{Markov condition} [ LINK TO BELOW]. Intuitively the graph describes a flow of information. 
+Bayesian networks are a graphical modelling tool used to show how random variables interact. A Bayesian network consists of a pair $(G,P)$ of directed acyclic graph (DAG) $G$ together with a joint probability distribution $P$ on its nodes, satisfying the \hyperlink{Markov}{\emph{Markov condition}}. Intuitively the graph describes a flow of information. 
 
 The Markov condition says that the system doesn't have \emph{memory}. That is, the distribution on a given node $Y$ is only dependent on the distributions on the nodes $X$ for which there is an edge $X \rightarrow Y$.
 Consider the following chain of binary events. In spring, the pollen in the air may cause someone to have an allergic reaction that may make them sneeze.
-\\
-CHAIN EXAMPLE PICTURE Slide 7 p 27
-\\
+
+{ \begin{figure}[H]
+\centering \includegraphics[width= 8cm]{blogpost_figures/fig1.png} \end{figure} }
+
 In this case the Markov condition says that given that you know that someone is having an allergic reaction, whether or not it is spring is not going to influence your belief about the likelihood of them sneezing. Which seems sensible.
 \vskip 2ex
-Bayesian networks are useful
+Bayesian networks are useful \marginpar{\sophie{Pablo - do you have better links for these things than I could find?}}
 \begin{itemize}
-\item as inference tool, for example in belief propagation [LINK],
+\item as an inference tool, for example in belief propagation [LINK],
 \item and because, given a Bayesian network $(G,P)$, we can describe \emph{d-separation} properties on $G$ which enable us to ascertain all the conditional independences [LINK] implied by $P$ entirely from the structure of $G$. 
 
 \end{itemize}
@@ -65,19 +71,19 @@ Classical mechanics rests on two intuitively reasonable and desirable assumption
 
 Physicists often define causality in terms of a \emph{discarding} principle: If we ignore the outcome of a physical process, it doesn't matter what process has occurred. Or, put another way, the outcome of a physical process doesn't change the initial conditions. 
 
-\item \textbf{Locality:} \pablo{Locality is the assumption that, at any given instant, the values of any particle's properties are independent of any other particle. Intuitively, it says that particles are individual entities that can be understood in isolation of any other particle. 
+\item \textbf{Locality:} {Locality is the assumption that, at any given instant, the values of any particle's properties are independent of any other particle. Intuitively, it says that particles are individual entities that can be understood in isolation of any other particle. 
 
 Physicists usually picture particles as having a private list of \textit{numbers} determining their properties. The principle of locality would be violated if any of the entries of such a list were \textit{a function} whose domain is another particle's property values.}
 
 \end{itemize}
 
-In 1935 Einstein, Podolski and Rosen showed that quantum mechanics (which was a recently born theory) predicted that a pair of particles could be prepared so that applying an action on one of them would instantaneously affect the other, no matter how distant in space they were, thus contradicting local causality. This seemed so unreasonable that the authors presented it as evidence that quantum mechanics was wrong.
+In 1935 \href{https://journals.aps.org/pr/pdf/10.1103/PhysRev.47.777}{Einstein, Podolski and Rosen} showed that quantum mechanics (which was a recently born theory) predicted that a pair of particles could be prepared so that applying an action on one of them would instantaneously affect the other, no matter how distant in space they were, thus contradicting local causality. This seemed so unreasonable that the authors presented it as evidence that quantum mechanics was wrong.
 
-But Einstein was wrong. In 1964, John S. Bell set the bases for an experimental test that would demonstrate that Einstein's ``spooky action at a distance'' (Einstein's own words), now known as \textit{entanglement}, was indeed real. Bell's experiment has been replicated countless of times and has plenty of variations. \href{https://www.youtube.com/watch?v=MUrXhAxGOWU}{This video} gives a detailed explanation of one of these experiments, for a non-physicist audience.
+But Einstein was wrong. In 1964, \href{On the Einstein Podolsky Rosen Paradox}{John S. Bell} set the bases for an experimental test that would demonstrate that Einstein's ``spooky action at a distance'' (Einstein's own words), now known as \textit{entanglement}, was indeed real. Bell's experiment has been replicated countless of times and has plenty of variations. \href{https://www.youtube.com/watch?v=MUrXhAxGOWU}{This video} gives a detailed explanation of one of these experiments, for a non-physicist audience.
 
-\marginpar{\sophie{We could reduce this to the first sentence if necessary, but I like it now.}}
+%\marginpar{\sophie{We could reduce this to the first sentence if necessary, but I like it now.}}
 
-But then, if acting on a particle has an instantaneous effect on a distant point in space, one of the two principle above is violated: On one hand, if we acted on both particles at the same time, each action being a distinct event, both would be affecting each other's result, so it would not be possible to decide on an ordering; causality would be broken. The other option would be to reject locality: \pablo{a property's value may be given by \textit{a function}, so the resulting value may \textit{instantaneously} change when the distant `domain' particle is altered. In that case, the particles' information was never separated in space, as they were never truly isolated, so causality is preserved.}
+But then, if acting on a particle has an instantaneous effect on a distant point in space, one of the two principle above is violated: On one hand, if we acted on both particles at the same time, each action being a distinct event, both would be affecting each other's result, so it would not be possible to decide on an ordering; causality would be broken. The other option would be to reject locality: {a property's value may be given by \textit{a function}, so the resulting value may \textit{instantaneously} change when the distant `domain' particle is altered. In that case, the particles' information was never separated in space, as they were never truly isolated, so causality is preserved.}
 
 Since causality is integral to our understanding of the world and forms the basis of scientific reasoning, the standard interpretation of quantum mechanics is to accept non-locality.
 
@@ -89,15 +95,15 @@ Since causality is integral to our understanding of the world and forms the basi
 \vskip 2ex
 
 
-The definition of Bayesian networks implies a discarding principle [LINK to discussion below] and hence there is a formal sense in which they are causal (even if, as we shall see, the correlations they model do not always reflect the temporal order). Under this interpretation, the causal theory Bayesian networks describe is classical. Precisely, they can only model probability distributions that satisfy local causality. Hence, in particular, they are not sufficient to model all physical correlations.
+The definition of Bayesian networks implies a \hyperlink{discard}{discarding principle} and hence there is a formal sense in which they are causal (even if, as we shall see, the correlations they model do not always reflect the temporal order). Under this interpretation, the causal theory Bayesian networks describe is classical. Precisely, they can only model probability distributions that satisfy local causality. Hence, in particular, they are not sufficient to model all physical correlations.
 
 
 
 \vskip 2ex
 
-The goal of the paper to develop a framework that generalises Bayesian networks and d-separation results, so that we can still use graph properties to reason about conditional dependence, independently of a given causal theory, be it classical, quantum, or even more general [LINK THIS]. In particular, this theory will be able to handle all physically observed correlations, and all theoretically postulated correlations.
+The goal of the paper to develop a framework that generalises Bayesian networks and d-separation results, so that we can still use graph properties to reason about conditional dependence, independently of a given causal theory, be it classical, quantum, or even more general. In particular, this theory will be able to handle all physically observed correlations, and all theoretically postulated correlations.
 
-Though category theory is not mentioned explicitly, the authors achieve their goal by using the categorical framework of \emph{operational probablistic theories} (OPTs) [LINK, CITATION].
+Though category theory is not mentioned explicitly, the authors achieve their goal by using the categorical framework of \href{https://arxiv.org/pdf/0908.1583.pdf}{\emph{operational probablistic theories} (OPTs)}.
 
 
 \section{Bayesian networks and d-separation}
@@ -109,17 +115,18 @@ Consider the situation in which we have three Boolean random variables. Alice is
 Now, flu can cause both sneezing and fever, that is
 \[ P(sneezing \ | \ flu ) \neq P( sneezing) \  \text{ and likewise } \ P(fever \ | \ flu ) \neq P( fever) \]
 so we could represent this graphically as
-\\
-INSERT FIGURE Slide 6 p25
-\\
-Moverover, intuitively we wouldn't expect there to be any other edges in the above graph. Sneezing and fever, though correlated - each is more likely if Alice has flu - are not direct causes of each other.  That is,
+
+{ \begin{figure}[H]
+\centering \includegraphics[width= 8cm]{blogpost_figures/fig1b.png} \end{figure} }
+
+Moreover, intuitively we wouldn't expect there to be any other edges in the above graph. Sneezing and fever, though correlated - each is more likely if Alice has flu - are not direct causes of each other.  That is,
 \[ P(sneezing \ | \ fever ) \neq P(sneezing) \  \text{ but } \ P(sneezing \ | \ fever, \ flu ) = P(sneezing \ | \ flu).\]
 
 
 
 
 \subsection{Bayesian networks}
-Let $G$ be a \emph{directed acyclic graph} or \emph{DAG} $G$. (Here a directed graph is a presheaf on ($ \bullet \rightrightarrows \bullet$) [e.g. LINK : \href{https://golem.ph.utexas.edu/category/2008/01/mark_weber_on_nerves_of_catego.html}{golem.ph.utexas.edu/category/2008/01/mark\_weber\_on\_nerves\_of\_catego.html}] and so does not have open or parallel edges.)
+Let $G$ be a \emph{directed acyclic graph} or \emph{DAG} $G$. (Here a directed graph is a \href{https://golem.ph.utexas.edu/category/2008/01/mark_weber_on_nerves_of_catego.html}{presheaf on ($ \bullet \rightrightarrows \bullet$)}).
 
 The set $Pa(Y)$ of \emph{parents} of a node $Y$ of $G$ contains those nodes $X$ of $G$ such that there is a directed edge $X \to Y$.
 
@@ -148,9 +155,9 @@ More generally, we may replace $X,Y$ and $Z$ with sets of random variables. So, 
 
 
 
-A joint probability distribution $P$ on the nodes of a DAG $ G$ is said to satisfy the Markov condition if for any set of random variable $\{X_i\}_{i = 1}^n$ on the nodes of $G$, with choice of values $\{x_i\}_{i = 1}^n$
+A joint probability distribution $P$ on the nodes of a DAG $ G$ is said to satisfy the \hypertarget{Markov}{Markov condition} if for any set of random variable $\{X_i\}_{i = 1}^n$ on the nodes of $G$, with choice of values $\{x_i\}_{i = 1}^n$
 
-\[P(x_i, \dots, x_n) = \prod_{i = 1}^n P(x_i|{pa(x_i)}).\]
+\[P(x_i, \dots, x_n) = \prod_{i = 1}^n P(x_i \ | \ {pa(x_i)}).\]
 
 So, for the flu, fever and sneezing example above, a distribution $P$ satisfies the Markov condition if
 \[ P(flu, \ fever, \ sneezing)  = P(fever \ | \ flu) P(sneezing \ | \ flu) P(flu).\]
@@ -158,7 +165,7 @@ So, for the flu, fever and sneezing example above, a distribution $P$ satisfies 
 A Bayesian network is defined as a pair $(G,P)$ of a DAG $G$ and a joint probability distribution $P$ on the nodes of $G$ that satisfies the Markov condition with respect to $G$. This means that each node in a Bayesian network is conditionally independent, given its parents, of any of the remaining nodes.
 
 In particular, given a Bayesian network $(G,P)$ such that there is a directed edge $X \to Y$, the Markov condition implies that 
-\[ \sum_{y} P(x,y) = \sum_y P(x) P(y \ | \ x) = P(x) \sum_y P(y \ | \ x)  = P(x)\] which may be interpreted as a discard condition [LINK BACK UP TO INTRO]. (The ordering is reflected by the fact that we can't derive $P(y)$ from $ \sum_{x} P(x,y) = \sum_x P(x) P(y \ | \ x) $.)
+\[ \sum_{y} P(x,y) = \sum_y P(x) P(y \ | \ x) = P(x) \sum_y P(y \ | \ x)  = P(x)\] which may be interpreted as a \hypertarget{discard}{discard condition} . (The ordering is reflected by the fact that we can't derive $P(y)$ from $ \sum_{x} P(x,y) = \sum_x P(x) P(y \ | \ x) $.)
 
 %\sout{Crucially, the correlations described by Bayesian networks are classical - they satisfy local causality.} [\pablo{This isn't correct. If you have \(A \to B\) you may have \textit{any} correlation. The whole point is that if you don't want an edge \(A \to B\), because \(A\) and \(B\) may be events that can't possibly signal each other, then you'd like to add a hidden variable \(\Lambda\) forming a fork. The correct claim is that adding a \textit{standard BN node \(\Lambda\) can't explain every possible correlation between A and B.} And that is the reason why we have unobserved nodes. I think this discussion should not be here, but rather in the section about latent/hidden/unobservable variables.]}
 
@@ -178,6 +185,8 @@ In other words, $X \ci Y   \ | \ Z$, though $X$ and $Y$ are not independent. Thi
 
 Reversing the arrows in the fork graph above gives a \emph{collider} as in the following example.
 
+{ \begin{figure}[H]
+\centering \includegraphics[width= 8cm]{blogpost_figures/fig1c.png} \end{figure} }
 
 Clearly whether or not Alice has allergies other than hayfever is independent of what season it is. So we'd expect a distribution on this graph to satisfy $X \ci Y   \ | \ \emptyset$. However, if we know that Alice is having an allergic reaction, we're going to be far more likely to assume that she has other allergies if we know it's not spring $X$ and $Y$ are not conditionally independent given $Z$.
 
@@ -217,23 +226,26 @@ Now d-separation is really useful since it tells us everything there is to know 
 \vskip 2 ex
 THEOREM 5
 
-\begin{itemize} \item \textbf{Soundness of d-separation} (Verma and Pearl, 1988)
+\begin{itemize} \item \textbf{Soundness of d-separation} (\href{https://www.sciencedirect.com/science/article/pii/B9780444886507500111}{Verma and Pearl, 1988})
 If $P$ is a Markov distribution with respect to a graph $G$ then for all disjoint subsets $X,Y,Z$ of nodes of $G$  $X \perp Y   \ | \ Z$ implies that $X,\ci Y   \ | \ Z$.
-\item \textbf{Completeness of d-separation} (Meek, 1995)
+\item \textbf{Completeness of d-separation} (\href{https://dl.acm.org/citation.cfm?id=2074205}{Meek, 1995})
 If $X \ci Y   \ | \ Z$ for all $P$ Markov with respect to $G$, then $ X \perp Y   \ | \ Z$.
 \end{itemize}
 
 We can combine the previous examples of fork, collider and chain graphs to get the following
 
-PICTURE SLIDE 9 page 35
+{ \begin{figure}[H]
+\centering \includegraphics[width= 12cm]{blogpost_figures/fig2.png} \end{figure} }
 
 A priori, \emph{Allergic reaction} is conditionally independent of \emph{Fever}. Indeed, we have the partition
 
-PICTURE SLIDE 11 page 40
+\begin{figure}[H]
+\centering \includegraphics[width= 12cm]{blogpost_figures/fig3.png} \end{figure} 
 
 which clearly satisfies d-separation. However, if \emph{Sneezing} is known, then \emph{Allergic reaction} and \emph{Fever} are not independent. Indeed, in the following partition we have $W = \emptyset$ but $m(U) \cap m(V) = \{ Sneezing \} $.
 
-PICTURE SLIDE 13 page 42
+\begin{figure}[H]
+\centering \includegraphics[width= 12cm]{blogpost_figures/fig4.png} \end{figure} 
 
 However, consider what happens what would happen if we added an arrow $Allergy \ \to \ Flu$, then \emph{Allergic Reaction} and \emph{Sneezing} are only conditionally independent if \emph{Allergy} is known. In other cases, we must choose whether to assign \emph{Allergy} to $U$ or $V$, but each option violates d-separation.
 
@@ -243,7 +255,7 @@ Before describing the limitations of this setup and why we may want to generalis
 
 
 
-\subsection{Latent variables, hidden variables, and moving beyond classical theories..}
+\subsection{Latent variables, hidden variables, and unobservables}
 
 In the context of Bayesian networks, there are two reasons that we may wish to add variables to a probabilistic model, even if we are not entirely sure what the variables signify or how they are distributed. The first reason is statistical and the second is physical.
 
@@ -255,25 +267,24 @@ Consider the example of flu, fever and sneezing discussed earlier. Clearly,
 %
 %In the example,
 After all, there are a whole bunch of things that can cause sneezing and flu. We just don't know what they all are or how to measure them.  So, to make the network work, we may add a hypothetical \emph{latent variable} that bunches together all the unknown joint causes, and equip it with a distribution that makes the whole network Bayesian, so that we are still able to perform inference methods like belief propagation.
-\vskip 2ex
-PICTURE SLIDE 15 p 46
-\vskip 2ex
-
+\begin{figure}[H]
+\centering \includegraphics[width= 9cm]{blogpost_figures/fig5.png} \end{figure} 
 
 %There's a saying in computer science that `all models are wrong'.
 On the other hand, we may want to add variables to a Bayesian network if we have evidence that doing so will provide a better model of reality. 
 
-For example, consider the network with just two connected nodes \\PICTURE SLIDE 17 p51\\ 
-\vskip 2ex 
+For example, consider the network with just two connected nodes
+\begin{figure}[H]
+\centering \includegraphics[width= 7cm]{blogpost_figures/fig6.png} \end{figure} 
+
 %\textbf{ Though all cause-effect relationships give correlations, not all correlations are cause-effect.}\\
 Every distribution on this graph is Markov, and we would expect there to be a correlation between a road being wet and the grass next to it being wet as well, but most people would claim that there's something missing from the picture. After all, rain could be a `common cause' of the road and the grass being wet. So, it makes sense to add a third variable.  
 
 But maybe we can't observe whether it has rained or not, only whether the grass and/or road are wet. Nonetheless, the correlation we observe suggests that they have a common cause. To deal with such cases, we could make the third variable \emph{hidden}. We may not know what information is included in a hidden variable, nor its probability distribution. 
 
 All that matters is that the hidden variable helps to explain the observed correlations.
-\vskip 2ex
-PICTURE SLIDE 18 p 52
-\vskip 2ex
+ \begin{figure}[H]
+\centering \includegraphics[width= 8cm]{blogpost_figures/fig7.png} \end{figure} 
 
 
  
@@ -283,10 +294,10 @@ So, latent variables are a statistical tool that ensure the Markov condition hol
 
 
 
-Most famously, Bell's experiment shows that it is possible to have distinct variables $A$ and $B$ that exhibit correlations that cannot be explained by any classical hidden variable, since classical variables are restricted by the principle of locality [LINK to introduction]. \sout{In fact, if we define a variable $\Lambda$ as the entire past of $A$ and $B$, so that if we create $A$ and $B$ and make sure nothing else can interact with them, then we know everything about $\Lambda$. Still, we may observe correlations that do not satisfy the Markov condition and are therefore not classically causal.}
+Most famously, Bell's experiment shows that it is possible to have distinct variables $A$ and $B$ that exhibit correlations that cannot be explained by any classical hidden variable, since classical variables are restricted by the principle of locality. 
 
-
-PICTURE
+%\sout{In fact, if we define a variable $\Lambda$ as the entire past of $A$ and $B$, so that if we create $A$ and $B$ and make sure nothing else can interact with them, then we know everything about $\Lambda$. Still, we may observe correlations that do not satisfy the Markov condition and are therefore not classically causal.}
+%
 
 In other words, though $A \perp B \ | \ \Lambda$, \[ P(a \ | b,\ \lambda) \neq P(a \ | \ \lambda).\]
 
@@ -334,6 +345,7 @@ dependence only makes sense between \emph{observable variables conditioned over 
 
 \section{Generalising classical causality}
 
+\marginpar{ \sophie{Pablo, shall we link to the \href{https://link.springer.com/chapter/10.1007/978-94-017-0990-3_45}{paper} or, e.g. this\href{https://www.scienceandnonduality.com/why-isnt-quantum-mechanics-even-weirder/}{blogpost}? I ask the same question below!}}
 The correlations observed in the Bell experiment can be explained by quantum mechanics. But thought experiments such as LINK suggest that theoretically, correlations may exist that violate even quantum causality.
 
 
@@ -344,7 +356,7 @@ Clearly the first step in answering these questions is to fix a definition of a 
 
 \subsection{Operational probabalistic theories}
 
-An \emph{operational theory} (CITATION) is a symmetric monoidal category $(\mathsf C, \otimes, I)$ 
+An \href{https://arxiv.org/pdf/0908.1583.pdf}{\emph{operational theory}} is a symmetric monoidal category $(\mathsf C, \otimes, I)$ 
 whose objects are known as \emph{systems} or \emph{resources}. Morphisms are finite sets $f = \{\mathcal C_i\}_{i \in I}$ called \emph{tests}, whose elements are called \emph{outcomes}. Tests with a single element are called \emph{deterministic}, and for each system $A \in ob (\mathsf C)$, the identity $id_A \in \mathsf (A,A)$ is a deterministic test.
 
 In this discussion, we'll identify tests $\{\mathcal C_i \}_i , \{\mathcal D_j\}_j$ in $\mathsf C$ if we may always replace one with the other without affecting the distributions in $\mathsf C(I, I)$.
@@ -364,18 +376,19 @@ In particular, for a causal OPT $\mathsf C$, uniqueness of the discard implies t
 \[ \top_A \otimes \top_B = \top_{A \otimes B},\] and, given any determinstic test $\mathcal C \in \mathsf C(A, B)$,
 \[\top_B \circ \mathcal C = \top_A.\]
 
-The existence of a discard map allows a definition of \emph{causal morphisms} in a causal theory. For example, as we saw in [Kissinger Uijlen LINK], a test $\{ \mathcal C_i \}_i \in \mathsf C (A, B)$ is \emph{causal} if 
+The existence of a discard map allows a definition of \emph{causal morphisms} in a causal theory. For example, as we saw in\href{https://golem.ph.utexas.edu/category/2018/01/a_categorical_semantics_for_ca.html#more}{January}, a test $\{ \mathcal C_i \}_i \in \mathsf C (A, B)$ is \emph{causal} if 
 \[\top_B \circ \{ \mathcal C_i \}_i = \top_A \in \mathsf C( A, I).\]
 
-In other words, for a causal test, discarding the outcome is the same as not performing the test. Intuitively it is not obvious why such morphisms should be called causal. But this definition enables the formulation of a \emph{no-signalling condition} [LINK] that describes the conditions under which the possibility of cause-effect correlation is excluded, in particular, it implies the impossibility of time travel.
+In other words, for a causal test, discarding the outcome is the same as not performing the test. Intuitively it is not obvious why such morphisms should be called causal. But this definition enables the formulation of a \href{https://golem.ph.utexas.edu/category/2018/01/a_categorical_semantics_for_ca.html#more}{\emph{non-signalling condition}} that describes the conditions under which the possibility of cause-effect correlation is excluded, in particular, it implies the impossibility of time travel.
 \vskip 2ex
 EXAMPLES\\
-The category $Mat(\mathbb R_+)$ of natural numbers and with $Mat(\mathbb R_+)(m,n)$ the set of $n \times m$ matrices, has the structure of a causal OPT as described in [LINK TO K-U BLOGPOST].  The causal morphisms in $Mat(\mathbb R_+)$ are the stochastic maps (the matrices whose columns sum to 1). This category describes classical probability theory.
+The category \href{https://golem.ph.utexas.edu/category/2018/01/a_categorical_semantics_for_ca.html#more}{$Mat(\mathbb R_+)$} of natural numbers and with $Mat(\mathbb R_+)(m,n)$ the set of $n \times m$ matrices, has the structure of a causal OPT.  The causal morphisms in $Mat(\mathbb R_+)$ are the stochastic maps (the matrices whose columns sum to 1). This category describes classical probability theory.
 
-The category $\mathsf{CPM}$ of sets of linear operators on Hilbert spaces and completely positive maps between them is an OPT and describes quantum relations [LINK]. The causal morphisms are the trace preserving completely positive maps.
+The category \href{https://arxiv.org/abs/1701.04732}{$\mathsf{CPM}$} of sets of linear operators on Hilbert spaces and completely positive maps between them is an OPT and describes quantum relations. The causal morphisms are the trace preserving completely positive maps.
 
-Finally, Boxworld [LINK] is a theory that is compatible with a maximum violation of the principle of locality. This means that it admits any 
-correlation that can .....[PABLO?...help?.. 1 sentence!!? (I want to include this here to for symmetry connecting to G)]
+\marginpar{ \sophie{Pablo, shall we link to the \href{https://link.springer.com/chapter/10.1007/978-94-017-0990-3_45}{paper} or, e.g. this\href{https://www.scienceandnonduality.com/why-isnt-quantum-mechanics-even-weirder/}{blogpost}?}}
+Finally, \pablo{Boxworld [LINK] is the theory that allows to describe any correlation between two variables as the cause of some resource of the theory in the past}.
+
 \subsection{Generalised Bayesian networks}
 
 So, we're finally ready to give the main construction and results of the paper. As mentioned before, to get a generalised d-separation result, the idea is that we will distinguish observable and unobservable variables, and simply insist that conditional independence is only defined relative to observable variables.
@@ -386,14 +399,14 @@ In order to get a generalisation of Theorem 5, we still need to come up with a s
 
 To state this precisely, we will associate a causal theory $(\mathsf C, \otimes, I)$ to a GDAG $G$  via an assignment of systems to edges of $G$ and tests to nodes of $G$, such that the observed edges of $G$ will `carry' only the outcomes of classical tests (so will say something about conditional probability) whereas unobserved edges will carry only the system output.
 
-Precisely, such an assignmetn $P$ satisfies the \emph{generalised Markov condition (GMC)} and is called a \emph{generalised Markov distribution} if
+Precisely, such an assignment $P$ satisfies the \emph{generalised Markov condition (GMC)} and is called a \emph{generalised Markov distribution} if
 
 \begin{itemize}
 
 \item Each unobserved edge corresponds to a distinct system in the theory.
 \item \emph{If we can't observe what is happening at a node, we can't condition over it:}
 To each unobserved node and each value of its observed parents, we assign a deterministic test from the system defined by the product of its incoming (unobserved) edges to the system defined by the product of its outgoing (unobserved) edges. 
-\item Each observed node $X$ is an observation test, i.e. a morphism in $\mathsf C(A, I)$ for the system $A \in ob( \mathsf C)$ corresponding to the product of the systems assigned to the unobserved input edges of $X$. Since $\mathsf C$ is a causal theory, this says (CITE CGP for PROOF) that $X$ is assigned a classical random variable, also denoted $X$, and that if $Y$ is an observed node, and has observed parent $X$, the distribution at $Y$ is conditionally dependent on the distribution at $X$.\\
+\item Each observed node $X$ is an observation test, i.e. a morphism in $\mathsf C(A, I)$ for the system $A \in ob( \mathsf C)$ corresponding to the product of the systems assigned to the unobserved input edges of $X$. Since $\mathsf C$ is a causal theory, this says that $X$ is assigned a classical random variable, also denoted $X$, and that if $Y$ is an observed node, and has observed parent $X$, the distribution at $Y$ is conditionally dependent on the distribution at $X$ (see \href{https://arxiv.org/pdf/0908.1583.pdf}{here} for details).\\
 It therefore follows that
 \item Each observed edge is assigned the trivial system $I$.
 \end{itemize}
@@ -405,18 +418,23 @@ A \emph{generalised Bayesian network} consists of a GDAG $G$ together with a gen
 
 EXAMPLE\\
 Consider the following GDAG
-\vskip 2ex PICTURE SLIDE 29 LHS p 90
-\vskip 2ex
+\begin{figure}[H]
+\centering \includegraphics[width= 7cm]{blogpost_figures/fig8.png} \end{figure} 
+
+
 
 The observed node $X$ has no incoming edges so we assign a probability distribution.
-\vskip 2ex PICTURE SLIDE 29 RHS p 90
-\vskip 2ex The unobserved node A \emph{depends} on $X$, and has no unobserved inputs, so we assign a deterministic test $A(x): I \to A$ for each value $x$ of $X$.
-\vskip 2ex PICTURE SLIDE 29 RHS p 92
-\vskip 2ex The observed node $Y$ has one incoming unobserved edge and no incoming observed edges so we assign to it a test $Y: A \to I$ such that, for each value $x$ of $X$, $Y \circ  A(x)$ is a probability distribution.
+
+The unobserved node A \emph{depends} on $X$, and has no unobserved inputs, so we assign a deterministic test $A(x): I \to A$ for each value $x$ of $X$.
+\begin{figure}[H]
+\centering \includegraphics[width= 7cm]{blogpost_figures/fig9.png} \end{figure} 
+
+ The observed node $Y$ has one incoming unobserved edge and no incoming observed edges so we assign to it a test $Y: A \to I$ such that, for each value $x$ of $X$, $Y \circ  A(x)$ is a probability distribution.
 
 Building up the rest of the picture gives an OPT diagram of the form
-\vskip 2ex PICTURE SLIDE 29 RHS p 97
-\vskip 2ex
+\begin{figure}[H]
+\centering \includegraphics[width= 8cm]{blogpost_figures/fig10.png} \end{figure} 
+
 
 
 
@@ -457,7 +475,7 @@ More generally, given a GDAG $G$, we can look at the set of distributions on $G$
 \begin{itemize}
 \item The set $\mathcal C$ of generalised Markov distributions in $Mat(\mathbb R_+)$ on $G$.
 \item The set $\mathcal Q$ of generalised Markov distributions in $\mathsf{CPM}$ on $G$.
-\item The set $\mathcal G$ of all generalised Markov distributions on $G$.Question - Does Boxworld give $\mathcal G$?
+\item The set $\mathcal G$ of all generalised Markov distributions on $G$. \sophie{(This is the set of generalised Markov distributions in Boxworld [LINK BACK UP].)}
 
 \end{itemize}
 
@@ -470,6 +488,6 @@ This means that one can ask for which graphs (some or all of) these inequalities
 Another interesting result is that there exist graphs for which $ \mathcal G \neq \mathcal I$. This means that using a theory of resources, whatever theory it may be, to explain correlations imposes constraints that are stronger than those imposed by the relations themselves. 
 \section{What next?}
 
-This setup represents one direction for using category theory to generalise Bayesian networks. In our group work at the ACT workshop, we considered another generalisation of Bayesian networks, this time staying within the classical realm. Namely, building on the work of ALEKS, PAWEL, THE ITALIANS, we gave a functorial Markov condition on directed graphs admitting cycles. Hopefully we'll present this work here very soon.
+This setup represents one direction for using category theory to generalise Bayesian networks. In our group work at the ACT workshop, we considered another generalisation of Bayesian networks, this time staying within the classical realm. Namely, building on the work of \href{https://arxiv.org/abs/1602.06771}{Bonchi, Gadducci, Kissinger, Sobocinski, and Zanasi}, we gave a functorial Markov condition on directed graphs admitting cycles. Hopefully we'll present this work here very soon.
 
 \end{document}
