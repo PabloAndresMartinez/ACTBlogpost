@@ -33,9 +33,9 @@
 \begin{document}
 \maketitle
 
-\sophie{In the final instalment of the \href{http://www.appliedcategorytheory.org/school/}{Applied Category Theory seminar}, we discussed the 2014 paper  \href{http://iopscience.iop.org/article/10.1088/1367-2630/16/11/113043/meta}{\emph{``Theory-independent limits on correlations from generalized Bayesian networks''}} by Henson, Lal and Pusey. 
+{In the final instalment of the \href{http://www.appliedcategorytheory.org/school/}{Applied Category Theory seminar}, we discussed the 2014 paper  \href{http://iopscience.iop.org/article/10.1088/1367-2630/16/11/113043/meta}{\emph{``Theory-independent limits on correlations from generalized Bayesian networks''}} by Henson, Lal and Pusey. 
 
-In this post, we'll give a short introduction to Bayesian networks, explain why quantum mechanics means that one may want to generalise them, and present the main results of the paper. That's a lot to cover, so there won't be a huge amount of category theory, but we hope to give the reader some intuition about the issues involved and how monoidal categories have a role to play in causal theory.}
+In this post, we'll give a short introduction to Bayesian networks, explain why quantum mechanics means that one may want to generalise them, and present the main results of the paper. That's a lot to cover, and there won't be a huge amount of category theory, but we hope to give the reader some intuition about the issues involved, and \href{https://golem.ph.utexas.edu/category/2018/01/a_categorical_semantics_for_ca.html#more}{another} example of monoidal categories used in causal theory.}
 
 \section{Introduction}
 
@@ -53,7 +53,7 @@ In this case the Markov condition says that given that you know that someone is 
 Bayesian networks are useful
 \begin{itemize}
 \item as an inference tool, thanks to \href{https://arxiv.org/abs/1201.4724}{belief propagation} algorithms,
-\item and because, given a Bayesian network $(G,P)$, we can describe \emph{d-separation} [LINK to \S~2.2] properties on $G$ which enable us to discover conditional independences in $P$. 
+\item and because, given a Bayesian network $(G,P)$, we can describe \hyperref[dsep]{\emph{d-separation}} properties on $G$ which enable us to discover conditional independences in $P$. 
 
 \end{itemize}
 
@@ -210,7 +210,7 @@ Crucially, in this case, knowing the season is also not going to affect whether 
 \[ Y \longrightarrow  Z \longrightarrow X .\]
 
 
-\subsection{d-separation}
+\subsection{d-separation}\label{dsep}
 
 The above observations can be generalised to statements about conditional independences in any Bayesian network. That is, if $(G,P)$ is a Bayesian network then the structure of $G$ is enough to derive all the conditional independences in $P$ that are implied by the graph $G$ (in reality there may be more that have not been included in the network!).
 
@@ -345,8 +345,8 @@ dependence only makes sense between \emph{observable variables conditioned over 
 
 \section{Generalising classical causality}
 
-\marginpar{ \sophie{Pablo, shall we link to the \href{https://link.springer.com/chapter/10.1007/978-94-017-0990-3_45}{paper} or, e.g. this\href{https://www.scienceandnonduality.com/why-isnt-quantum-mechanics-even-weirder/}{blogpost}? I ask the same question below! \pablo{I would go with a paper in this case, and I prefer this one: https://www.nature.com/articles/nphys2916 (but the one you gave is good too).}}}
-The correlations observed in the Bell experiment can be explained by quantum mechanics. But thought experiments such as LINK suggest that theoretically, correlations may exist that violate even quantum causality.
+%\marginpar{ \sophie{Pablo, shall we link to the \href{https://link.springer.com/chapter/10.1007/978-94-017-0990-3_45}{paper} or, e.g. this\href{https://www.scienceandnonduality.com/why-isnt-quantum-mechanics-even-weirder/}{blogpost}? I ask the same question below! \pablo{I would go with a paper in this case, and I prefer this one: https://www.nature.com/articles/nphys2916 (but the one you gave is good too).}}}
+The correlations observed in the Bell experiment can be explained by quantum mechanics. But thought experiments such as described  \href{https://www.nature.com/articles/nphys2916}{here} suggest that theoretically, correlations may exist that violate even quantum causality.
 
 
 So, given that graphical models and d-separation provide such a powerful tool for causal reasoning in the classical context, 
@@ -376,7 +376,7 @@ In particular, for a causal OPT $\mathsf C$, uniqueness of the discard implies t
 \[ \top_A \otimes \top_B = \top_{A \otimes B},\] and, given any determinstic test $\mathcal C \in \mathsf C(A, B)$,
 \[\top_B \circ \mathcal C = \top_A.\]
 
-The existence of a discard map allows a definition of \emph{causal morphisms} in a causal theory. For example, as we saw in\href{https://golem.ph.utexas.edu/category/2018/01/a_categorical_semantics_for_ca.html#more}{January}, a test $\{ \mathcal C_i \}_i \in \mathsf C (A, B)$ is \emph{causal} if 
+The existence of a discard map allows a definition of \emph{causal morphisms} in a causal theory. For example, as we saw in \href{https://golem.ph.utexas.edu/category/2018/01/a_categorical_semantics_for_ca.html#more}{January} when we discussed \href{https://arxiv.org/abs/1701.04732}{Kissinger and Uijlen's paper}, a test $\{ \mathcal C_i \}_i \in \mathsf C (A, B)$ is \emph{causal} if 
 \[\top_B \circ \{ \mathcal C_i \}_i = \top_A \in \mathsf C( A, I).\]
 
 In other words, for a causal test, discarding the outcome is the same as not performing the test. Intuitively it is not obvious why such morphisms should be called causal. But this definition enables the formulation of a \href{https://golem.ph.utexas.edu/category/2018/01/a_categorical_semantics_for_ca.html#more}{\emph{non-signalling condition}} that describes the conditions under which the possibility of cause-effect correlation is excluded, in particular, it implies the impossibility of time travel.
@@ -386,8 +386,8 @@ The category \href{https://golem.ph.utexas.edu/category/2018/01/a_categorical_se
 
 The category \href{https://arxiv.org/abs/1701.04732}{$\mathsf{CPM}$} of sets of linear operators on Hilbert spaces and completely positive maps between them is an OPT and describes quantum relations. The causal morphisms are the trace preserving completely positive maps.
 
-\marginpar{ \sophie{Pablo, shall we link to the \href{https://link.springer.com/chapter/10.1007/978-94-017-0990-3_45}{paper} or, e.g. this\href{https://www.scienceandnonduality.com/why-isnt-quantum-mechanics-even-weirder/}{blogpost}?}}
-Finally, \pablo{Boxworld [LINK] is the theory that allows to describe any correlation between two variables as the cause of some resource of the theory in the past}.
+%\marginpar{ \sophie{Pablo, shall we link to the \href{https://link.springer.com/chapter/10.1007/978-94-017-0990-3_45}{paper} or, e.g. this\href{https://www.scienceandnonduality.com/why-isnt-quantum-mechanics-even-weirder/}{blogpost}?}}
+Finally, \href{https://www.nature.com/articles/nphys2916}{Boxworld} is the \hypertarget{box}{theory} that allows to describe any correlation between two variables as the cause of some resource of the theory in the past.
 
 \subsection{Generalised Bayesian networks}
 
@@ -475,7 +475,7 @@ More generally, given a GDAG $G$, we can look at the set of distributions on $G$
 \begin{itemize}
 \item The set $\mathcal C$ of generalised Markov distributions in $Mat(\mathbb R_+)$ on $G$.
 \item The set $\mathcal Q$ of generalised Markov distributions in $\mathsf{CPM}$ on $G$.
-\item The set $\mathcal G$ of all generalised Markov distributions on $G$. \sophie{(This is the set of generalised Markov distributions in Boxworld [LINK BACK UP].)}
+\item The set $\mathcal G$ of all generalised Markov distributions on $G$. (This is the set of generalised Markov distributions in \hyperlink{box}{Boxworld}.)
 
 \end{itemize}
 
