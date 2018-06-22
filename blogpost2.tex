@@ -113,14 +113,14 @@ Though category theory is not mentioned explicitly, the authors achieve their go
 Consider the situation in which we have three Boolean random variables. Alice is either \emph{sneezing} or she is not, she either has a  a \emph{fever} or she does not, and she may or may not have \emph{flu}.
 
 Now, flu can cause both sneezing and fever, that is
-\[ P(sneezing \ | \ flu ) \neq P( sneezing) \  \text{ and likewise } \ P(fever \ | \ flu ) \neq P( fever) \]
+\[ P(Sneezing \ | \ Flu ) \neq P( Sneezing) \  \text{ and likewise } \ P(Fever \ | \ Flu ) \neq P( Fever) \]
 so we could represent this graphically as
 
 { \begin{figure}[H]
 \centering \includegraphics[width= 8cm]{blogpost_figures/fig1b.png} \end{figure} }
 
 Moreover, intuitively we wouldn't expect there to be any other edges in the above graph. Sneezing and fever, though correlated - each is more likely if Alice has flu - are not direct causes of each other.  That is,
-\[ P(sneezing \ | \ fever ) \neq P(sneezing) \  \text{ but } \ P(sneezing \ | \ fever, \ flu ) = P(sneezing \ | \ flu).\]
+\[ P(Sneezing \ | \ Fever ) \neq P(Sneezing) \  \text{ but } \ P(Sneezing \ | \ Fever, \ Flu ) = P(Sneezing \ | \ Flu).\]
 
 
 
@@ -130,7 +130,7 @@ Let $G$ be a \emph{directed acyclic graph} or \emph{DAG} $G$. (Here a directed g
 
 The set $Pa(Y)$ of \emph{parents} of a node $Y$ of $G$ contains those nodes $X$ of $G$ such that there is a directed edge $X \to Y$.
 
-So, in the example above $Pa(flu) = \emptyset$ while $Pa(fever) = Pa(sneezing) = \{ flu \}$.
+So, in the example above $Pa(Flu) = \emptyset$ while $Pa(Fever) = Pa(Sneezing) = \{ Flu \}$.
 
 
 To each node $X$ of a directed graph $G$, we may associate a random variable, also denoted $X$. If $V$ is the set of nodes of $G$ and $(x_X)_{X \in V}$ is a choice of value $x_X$ for each node $X$, such that $y$ is the chosen value for $Y$, then $pa(y)$ will denote the $Pa(Y)$-tuple of values $(x_X)_{X \in Pa(Y)}$. 
@@ -159,8 +159,8 @@ A joint probability distribution $P$ on the nodes of a DAG $ G$ is said to satis
 
 \[P(x_i, \dots, x_n) = \prod_{i = 1}^n P(x_i \ | \ {pa(x_i)}).\]
 
-So, for the flu, fever and sneezing example above, a distribution $P$ satisfies the Markov condition if
-\[ P(flu, \ fever, \ sneezing)  = P(fever \ | \ flu) P(sneezing \ | \ flu) P(flu).\]
+So, for the Flu, Fever and Sneezing example above, a distribution $P$ satisfies the Markov condition if
+\[ P(Flu, \ Fever, \ Sneezing)  = P(Fever \ | \ Flu) P(Sneezing \ | \ Flu) P(Flu).\]
 
 A Bayesian network is defined as a pair $(G,P)$ of a DAG $G$ and a joint probability distribution $P$ on the nodes of $G$ that satisfies the Markov condition with respect to $G$. This means that each node in a Bayesian network is conditionally independent, given its parents, of any of the remaining nodes.
 
@@ -176,7 +176,7 @@ Let's consider some simple examples.
 \vskip 2ex
 \textbf{Fork}\\
 
-In the example of flu, sneezing and fever above, the graph has a \emph{fork} shape. For a probability distribution $P$ to satisfy the Markov condition for this graph we must have
+In the example of Flu, Sneezing and Fever above, the graph has a \emph{fork} shape. For a probability distribution $P$ to satisfy the Markov condition for this graph we must have
 \[ P(x, y, z) = P(x \ | \ z) P(y \ | \ z)P(z), \ \forall x,y,z.\] However, $P(x,y) \neq P(x) P(y)$.
 
 In other words, $X \ci Y   \ | \ Z$, though $X$ and $Y$ are not independent. This makes sense, we wouldn't expect sneezing and fever to be uncorrelated, but given that we know whether or not Alice has flu, telling us that she has fever isn't going to tell us anything about her sneezing.
@@ -259,8 +259,8 @@ Before describing the limitations of this setup and why we may want to generalis
 
 In the context of Bayesian networks, there are two reasons that we may wish to add variables to a probabilistic model, even if we are not entirely sure what the variables signify or how they are distributed. The first reason is statistical and the second is physical.
 
-Consider the example of flu, fever and sneezing discussed earlier. Clearly, 
-\[ P(fever \ | \ sneezing, \ flu) \neq P(fever \ |  \ flu).\]
+Consider the example of Flu, Fever and Sneezing discussed earlier. Clearly, 
+\[ P(Fever \ | \ Sneezing, \ Flu) \neq P(Fever \ |  \ Flu).\]
 %After all, lots of things could cause both sneezing and flu and it's unlikely that we could ever manage to list them all and add them all separately to our network.
 %
 %In these cases, we may also add hypothetical \emph{latent} variables, just to make the observed distribution Markov. 
