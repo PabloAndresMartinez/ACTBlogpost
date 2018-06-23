@@ -1,4 +1,4 @@
-*Guest post by Pable Andres-Martinez and Sophie Raynor*
+*Guest post by Pablo Andres-Martinez and Sophie Raynor*
 
 In the final instalment of the [Applied Category Theory
 seminar](http://www.appliedcategorytheory.org/school/), we discussed the
@@ -73,7 +73,7 @@ assumptions, together called *local causality*,
 -   **Causality:** 
 
     Causality is usually treated as a physical primitive.
-    Simply put it is the principle that there is a \[partial\] ordering
+    Simply put it is the principle that there is a (partial) ordering
     of events in space time. In order to have information flow from
     event $A$ to event $B$, $A$ *must* be in the past of $B$.
 
@@ -94,7 +94,7 @@ assumptions, together called *local causality*,
     would be violated if any of the entries of such a list were *a
     function* whose domain is another particle's property values.
 
-In 1935 [Einstein, Podolski and
+In 1935 [Einstein, Podolsky and
 Rosen](https://journals.aps.org/pr/pdf/10.1103/PhysRev.47.777) showed
 that quantum mechanics (which was a recently born theory) predicted that
 a pair of particles could be prepared so that applying an action on one
@@ -104,7 +104,7 @@ unreasonable that the authors presented it as evidence that quantum
 mechanics was wrong.
 
 But Einstein was wrong. In 1964, [John S.
-Bell](On the Einstein Podolsky Rosen Paradox) set the bases for an
+Bell](http://elib.bsu.by/bitstream/123456789/154530/1/1964-001%20P%20Bell%20-%20On%20the%20Einstein%20Podolsky%20Rosen%20paradox.pdf) set the bases for an
 experimental test that would demonstrate that Einstein's "spooky action
 at a distance" (Einstein's own words), now known as *entanglement*, was
 indeed real. Bell's experiment has been replicated countless of times
@@ -142,9 +142,9 @@ correlations.
 
 
 
-The goal of the paper to develop a framework that generalises Bayesian
+The goal of the paper is to develop a framework that generalises Bayesian
 networks and d-separation results, so that we can still use graph
-properties to reason about conditional dependence, independently of a
+properties to reason about conditional dependence under any
 given causal theory, be it classical, quantum, or even more general. In
 particular, this theory will be able to handle all physically observed
 correlations, and all theoretically postulated correlations.
@@ -306,7 +306,7 @@ the Markov condition with respect to the chain graph
 $$X \longrightarrow Z \longrightarrow Y$$ if and only if $P$ satisfies
 the Markov condition on $$Y \longrightarrow  Z \longrightarrow X .$$
 
-### d-separation {#dsep}
+### d-separation
 
 
 The above observations can be generalised to statements about
@@ -545,7 +545,7 @@ impossibility of time travel.
 
 
 
-####Examples
+#### Examples
 
 
 The category
@@ -562,7 +562,7 @@ between them is an OPT and describes quantum relations. The causal
 morphisms are the trace preserving completely positive maps.
 
 Finally, [Boxworld](https://www.nature.com/articles/nphys2916) is the
-[theory]{#box} that allows to describe any correlation between two
+theory that allows to describe any correlation between two
 variables as the cause of some resource of the theory in the past.
 
 ### Generalised Bayesian networks
@@ -734,7 +734,7 @@ causal theory. Of particular importance are the following.
 
 -   The set $\mathcal G$ of all generalised Markov distributions on $G$.
     (This is the set of generalised Markov distributions in
-    [Boxworld](#box).)
+    [Boxworld](https://www.nature.com/articles/nphys2916).)
 
 Moreover, we can distinguish another class of distributions on $G$, by
 not restricting to d-seperation of observed nodes, but considering
@@ -769,4 +769,4 @@ staying within the classical realm. Namely, building on the work of
 [Bonchi, Gadducci, Kissinger, Sobocinski, and
 Zanasi](https://arxiv.org/abs/1602.06771), we gave a functorial Markov
 condition on directed graphs admitting cycles. Hopefully we'll present
-this work here very soon.
+this work here soon.
